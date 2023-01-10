@@ -73,14 +73,15 @@ jobs:
             cp dist/OpenLens-${{ env.LENS_VERSION }}.arm64.deb releasefiles/OpenLens-${{ env.LENS_VERSION }}.arm64.deb
             cp dist/OpenLens-${{ env.LENS_VERSION }}.aarch64.rpm releasefiles/OpenLens-${{ env.LENS_VERSION }}.arm64.rpm
           else
-            make build
+            $env:ELECTRON_BUILDER_EXTRA_ARGS="--x64 --arm64 --config.win.verifyUpdateCodeSignature=false"; make build
+
             cp dist/OpenLens*.exe releasefiles/OpenLens-${{ env.LENS_VERSION }}.exe
             cp dist/OpenLens*.exe dist/OpenLens-${{ env.LENS_VERSION }}.exe
           fi
         shell: bash
         working-directory: lens
         env:
-          CSC_IDENTITY_AUTO_DISCOVERY: false
+
           APPBUNDLEID: "io.kontena.lens-app"
           APPLEID: ${{ secrets.APPLEID }}
           APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
