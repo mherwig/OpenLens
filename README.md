@@ -1,9 +1,12 @@
-# OpenLens Build Repo
+# OpenLens Windows Binary Build Repo
 
-[![Build Lens](https://github.com/MuhammedKalkan/OpenLens/actions/workflows/main.yml/badge.svg)](https://github.com/MuhammedKalkan/OpenLens/actions/workflows/main.yml)
+[![Build Lens](https://github.com/mherwig/OpenLens/actions/workflows/main.yml/badge.svg)](https://github.com/mherwig/OpenLens/actions/workflows/main.yml)
+
+## How does it differ from github.com/MuhammedKalkan/OpenLens?
+I created this repositoy mainly for myself and my team to have full control over the built binaries. Currently this repository only builds unsigned Windows binaries, which can be installed by using scoop.
 
 ##  Build Repo Only
-This repo **ONLY PROVIDES SIGNED BINARIES AND DOES NOT ALTER SOURCE CODE** for the OpenLens repo. For software issues regarding OpenLens or the Lens IDE, go to the [Lens repo](https://github.com/lensapp/lens/issues) and open an issue there.
+This repository does **not** alter any source code of the OpenLens repository. Note, that the built binaries are currently **not signed**. For software issues regarding OpenLens or the Lens IDE, go to the [Lens repo](https://github.com/lensapp/lens/issues) and open an issue there.
 
 ## Extensions
 
@@ -30,34 +33,20 @@ The Kubernetes management tool [Lens IDE](https://k8slens.dev/) is a distributio
 ## Installation
 
 ### Manual
-Go to [Releases](https://github.com/MuhammedKalkan/OpenLens/releases) and download the relevant binary for your system.
-
-### MacOS
-#### Homebrew
-```
-brew install --cask openlens
-```
-
-### Linux
-Download and install appropriate package
-(`.rpm`, `.deb` or `.AppImage`)
-and install based on available package manager.
+Go to [Releases](https://github.com/mherwig/OpenLens/releases) and download the relevant binary for your system.
 
 ### Windows
 
 #### Scoop
 ```
-scoop bucket add extras
-scoop install openlens
+scoop bucket add mherwig https://github.com/mherwig/scoop-bucket.git
+scoop install mherwig/openlens
 ```
-#### Winget
-```
-winget install openlens
-```
-
 
 ## Thanks
 Big Thanks to
+[Muhammed Kalkan](https://github.com/MuhammedKalkan)
+,
 [Ebby Peter](https://github.com/ebbypeter)
 ,
 [Xaver Lohmüller](https://github.com/xavierLowmiller)

@@ -12,7 +12,8 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [ubuntu-20.04, macos-latest, windows-latest]
+        # [ubuntu-20.04, macos-latest, windows-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 360
     steps:
@@ -72,23 +73,23 @@ jobs:
             cp dist/OpenLens-${{ env.LENS_VERSION }}.arm64.deb releasefiles/OpenLens-${{ env.LENS_VERSION }}.arm64.deb
             cp dist/OpenLens-${{ env.LENS_VERSION }}.aarch64.rpm releasefiles/OpenLens-${{ env.LENS_VERSION }}.arm64.rpm
           else
-            make build
+            env ELECTRON_BUILDER_EXTRA_ARGS="--config.win.verifyUpdateCodeSignature" make build
             cp dist/OpenLens*.exe releasefiles/OpenLens-${{ env.LENS_VERSION }}.exe
             cp dist/OpenLens*.exe dist/OpenLens-${{ env.LENS_VERSION }}.exe
           fi
         shell: bash
         working-directory: lens
-        env:
-          APPBUNDLEID: "io.kontena.lens-app"
-          APPLEID: ${{ secrets.APPLEID }}
-          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
-          CSC_LINK: ${{ runner.os == 'macos' && secrets.CSC_LINK || secrets.CSC_LINK_WIN }}
-          CSC_KEY_PASSWORD: ${{ runner.os == 'macos' && secrets.CSC_KEY_PASSWORD || secrets.CSC_KEY_PASSWORD_WIN}}
-          CSC_LINK_WIN: ${{ secrets.CSC_LINK_WIN }}
-          CSC_KEY_PASSWORD_WIN: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
-          WIN_CSC_LINK: ${{ secrets.CSC_LINK_WIN }}
-          WIN_CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
-          CSC_FOR_PULL_REQUEST: true
+        #env:
+          #APPBUNDLEID: "io.kontena.lens-app"
+          #APPLEID: ${{ secrets.APPLEID }}
+          #APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+          #CSC_LINK: ${{ runner.os == 'macos' && secrets.CSC_LINK || secrets.CSC_LINK_WIN }}
+          #CSC_KEY_PASSWORD: ${{ runner.os == 'macos' && secrets.CSC_KEY_PASSWORD || secrets.CSC_KEY_PASSWORD_WIN}}
+          #CSC_LINK_WIN: ${{ secrets.CSC_LINK_WIN }}
+          #CSC_KEY_PASSWORD_WIN: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
+          #WIN_CSC_LINK: ${{ secrets.CSC_LINK_WIN }}
+          #WIN_CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD_WIN }}
+          #CSC_FOR_PULL_REQUEST: true
 
       - name: Calculate SHA256 checksum
         run: |
